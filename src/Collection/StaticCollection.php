@@ -34,7 +34,7 @@ abstract class StaticCollection implements CollectionInterface
      * @param int $length
      * @return self
      */
-    public function slice(int $start, int $length)
+    public function slice(int $start, ?int $length)
     {
         $end = count($this->set);
         if ($start > $end || $length > $end) {
@@ -88,7 +88,7 @@ abstract class StaticCollection implements CollectionInterface
     /**
      * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
@@ -112,7 +112,7 @@ abstract class StaticCollection implements CollectionInterface
     /**
      * @return void
      */
-    public function next()
+    public function next(): void
     {
         ++$this->position;
     }
@@ -129,7 +129,7 @@ abstract class StaticCollection implements CollectionInterface
      * @param int $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->set);
     }
@@ -137,7 +137,7 @@ abstract class StaticCollection implements CollectionInterface
     /**
      * @param int $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         throw new \RuntimeException('Cannot unset from a Static Collection');
     }
@@ -146,7 +146,7 @@ abstract class StaticCollection implements CollectionInterface
      * @param int $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (!array_key_exists($offset, $this->set)) {
             throw new \OutOfRangeException('Nothing found at this offset');
@@ -159,7 +159,7 @@ abstract class StaticCollection implements CollectionInterface
      * @param int $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         throw new \RuntimeException('Cannot add to a Static Collection');
     }
